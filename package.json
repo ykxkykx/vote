@@ -1,0 +1,26 @@
+{
+  "name": "vote",
+  "version": "1.0.0",
+  "description": "a voting website",
+  "main": "vote.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ykxkykx/vote.git"
+  },
+  "keywords": [
+    "vote"
+  ],
+  "author": "ykxkykx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ykxkykx/vote/issues"
+  },
+  "homepage": "https://github.com/ykxkykx/vote#readme",
+  "dependencies": {
+    "express": "^4.16.1",
+    "jade": "^1.11.0"
+  }
+}

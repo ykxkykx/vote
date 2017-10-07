@@ -1,0 +1,124 @@
+extends layout
+
+block myscript
+  script(src="js/jquery-3.2.1.min.js", defer="defer")
+  script(src="js/index.js", defer="defer")
+
+block content
+  #introduce
+    img#open(src="img/vote.png")
+    #note
+      h2(style="text-align:center;") #{notetitle}
+      p(style="text-indent:28px") #{notefor}
+      each item in notice
+        p
+          b #{item[0]}
+          span #{item[1]}
+      p(style="text-align: right;")
+        //- TODO: 将两个链接改为真正的链接
+        a(href="#", style="text-decoration:none;")
+          b 第八届十佳
+        span |
+        a(href="#", style="text-decoration:none;")
+          b 第七届十佳
+  #container.container
+    .row
+      each item in students
+        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+          .box
+            //- TODO: 将链接改为进入个人界面的链接
+            a(href="#", target="_blank", style="height: 350px;text-decoration:none")
+              img(src="img/银他妈.jpg", style="width:100%")
+              .college #{item[0]}
+            .introduction
+              p
+                span#name #{item[1]}
+                span #{item[2]}
+                br
+                br
+                b #{item[3]}
+                br
+                br
+                span #{item[4]}
+                br
+                span #{item[5]}
+                br
+                span #{item[6]}
+                br
+                span #{item[7]}
+                br
+                span ……
+          .shadow
+    #comment.row
+      #show_comment
+        each item in users
+          .per_comment
+            hr
+            div
+              span.email #{item[0]}
+            div
+              span.comment_content #{item[1]}
+            div
+              span.date #{item[2]}
+      hr
+      #fb_div
+        span#fb
+          img(src="img/pen.png")
+          span 发表评论
+      #wtcomment
+        form(method="post")
+          label
+            input#email_2.form-control(type="text",placeholder="请输入邮箱")
+          label
+            textarea#comment_2.form-control(type="text", style="resize:none", placeholder="请输入评论:")
+          label
+            input#verify_2.form-control(type="text", placeholder="请输入验证码")
+            img#veri_code(src="http://localhost:28848/vcode")
+        #close_2.close
+          span &times;
+        p#tip_2(style="color: red;")
+  #footer
+    .littlebox
+      p.zbf #{cfc[0]}
+      p #{cfc[1]}
+        a(href="http://www.crazyforcode.org") #{cfc[2]}
+      h5 #{cfc[3]}
+    .cfc_box
+      img.cfc_qq(src="img/cfc_qq.jpg", alt="CFC对外交流群二维码")
+      p.open_up #{cfc[4]}
+  #vote(style="display: none;")
+    .container-fluid
+      .row
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6.ranking
+          .titleName #{votenow[0]}
+          ul
+          - for(var i = 0; i < 10; i++)
+            li
+              span.top10 #{i+1}
+              span.name #{students[i][1]}
+              span.votes 0
+          - for(var i = 10; i < 15; i++)
+            li
+              span.bottom5 #{i+1}
+              span.name #{students[i][1]}
+              span.votes 0
+        .col-xs-12.col-sm-12.col-md-6.col-lg-6.ranking
+          .titleName #{votenow[1]}
+          ul
+            each item in students
+              li
+                input(name="test",type="checkbox",value="test1")
+                span.name #{item[1]}
+    .verify
+      form(method="post")
+        label
+          input#ipt_email.form-control.inputbox(type="text",placeholder="请输入邮箱")
+          //- TODO: formaction是啥鬼
+          button#getVeri.btn.btn-primary(type="submit",formaction="/getvcode") 获取验证码
+        label
+          input#ipt_verify.form-control.inputbox(type="text",placeholder="请输入验证码")
+          button#submitVotes.btn.btn-primary(type="submit",formaction="/test") 提交投票
+      p#tip(style="color: red")
+    #close.close(aria-label="Close")
+      span(aria-hidden="true") &times;
+  #mask
